@@ -54,13 +54,13 @@ class AuthenticationService {
     return result.accessToken;
   }
 
-  getUserRole(): UserRole | undefined {
+  getUserRole(): string[] | undefined {
     const activeAccount = msalInstance.getActiveAccount();
 
     if (activeAccount) {
       const identityTokenClaims =
         activeAccount?.idTokenClaims as unknown as IdentityTokenClaims;
-      return getRoleFromGroup(identityTokenClaims.groups);
+      return identityTokenClaims.groups;
     }
   }
 
